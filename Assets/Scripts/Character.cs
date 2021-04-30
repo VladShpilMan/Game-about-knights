@@ -9,6 +9,7 @@ public class Character : MonoBehaviour {
     private int currentHealth;
     [SerializeField]
     private float speed = 3.0F;
+    float speedX;
     [SerializeField]
     private float jumpForce = 15.0F;
     public float speedAnimHurt = 2F;
@@ -36,59 +37,61 @@ public class Character : MonoBehaviour {
 
   
 
+    //private void FixedUpdate() {
+    //    CheckGround();
+    //}
+
     private void FixedUpdate() {
-        CheckGround();
-    }
-
-    private void Update() {
-
-        if(Input.GetAxisRaw("Horizontal") > 0 && isProtection == false)
-        {
-            Run();
-            rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
-        }
-        else if(Input.GetAxisRaw("Horizontal") < 0 && isProtection == false)
-        {
-            Run();
-            rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
-        }
-        else
-        {
-            rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);  // No Inertia
-        }
-        if(Input.GetButtonDown("Jump") && isGround && isProtection == false)
-        {
-            Jump();
-        }
-        if (Input.GetKey(KeyCode.LeftShift)) {     
-            animator.SetFloat("speedAnimProtection", speedAnimProtection);
-            isProtection = true;
-            animator.SetBool("isProtection", true);
-        } else {
-            animator.SetBool("isProtection", false);
-            isProtection = false;
-        }
+        animator.SetBool("isMove", false);       
         animator.SetBool("isGround", isGround);
-        animator.SetFloat("Speed", Mathf.Abs(rigidbody.velocity.x));
+
+        CheckGround();
+        Run();
+        Jump();
+        Protection();
     }
 
     private void Run() {
-        Vector3 direction = transform.right * Input.GetAxis("Horizontal");
+        speedX = speed / 100;
+        if (Input.GetAxisRaw("Horizontal") > 0 && !isProtection) {
+            sprite.flipX = false;
+            animator.SetBool("isMove", true);
+            transform.Translate(speedX, 0, 0);
+        }
+        else if (Input.GetAxisRaw("Horizontal") < 0 && !isProtection) {
+            sprite.flipX = true;
+            animator.SetBool("isMove", true);
+            transform.Translate(-speedX, 0, 0);
+        }
 
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
-
-        sprite.flipX = direction.x < 0.0F;
-      
     }
 
     private void Jump() {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+        if (Input.GetButtonDown("Jump") && isGround && isProtection == false)
+        
+            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        
+
     }
 
     private void CheckGround() {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3F);
         
         isGround = colliders.Length > 1;       
+    }
+
+    private void Protection() {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            animator.SetFloat("speedAnimProtection", speedAnimProtection);
+            isProtection = true;
+            animator.SetBool("isProtection", true);
+        }
+        else
+        {
+            animator.SetBool("isProtection", false);
+            isProtection = false;
+        }
     }
 
     // the function deals damage to the object, if the object has no lives left, then it dies
