@@ -35,11 +35,6 @@ public class Character : MonoBehaviour {
         collider = GetComponentInChildren<Collider2D>();
     }
 
-  
-
-    //private void FixedUpdate() {
-    //    CheckGround();
-    //}
 
     private void FixedUpdate() {
         animator.SetBool("isMove", false);       

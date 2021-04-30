@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 3;
     int currentHealth;
-    public int speed = 4;
+    public float speed;
+    private float speedX;
     float speedAtMoment;
     public int positionOfPatrol = 5;
     public int attackDamage = 1;
@@ -46,7 +47,7 @@ public class Enemy : MonoBehaviour
         character = GameObject.FindGameObjectWithTag("Character").transform;
     }
 
-    void Update() { // i check the states of the object from the function
+    void FixedUpdate() { // i check the states of the object from the function
 
         /*if the distance between the gameObject and the patrol center Point is less 
             than the allowed patrol length and the gameObject is not in a state of "angry", then enable state "chill"*/
@@ -84,6 +85,7 @@ public class Enemy : MonoBehaviour
     }
    
     void Chill() {
+        speedX = speed / 100;
         if (transform.position.x > point.position.x + positionOfPatrol) {
             movingRight = false;
         }
@@ -92,15 +94,13 @@ public class Enemy : MonoBehaviour
         }
 
         if (movingRight) {
-            animator.SetFloat("Speed", 1);
             sprite.flipX = false;
-            rigidbody.velocity = new Vector2(0.1f, rigidbody.velocity.y);
-            transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
+            animator.SetBool("isMove", true);
+            transform.Translate(speedX, 0, 0);
         } else {
-            animator.SetFloat("Speed", 1);
             sprite.flipX = true;
-            rigidbody.velocity = new Vector2(-0.1f, rigidbody.velocity.y);
-            transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
+            animator.SetBool("isMove", true);
+            transform.Translate(-speedX, 0, 0);
         }
     }
 
@@ -123,17 +123,15 @@ public class Enemy : MonoBehaviour
             }
 
 
-            speedAtMoment = 2.8f; // the gameObject increases its speed in case of aggression
-
             if (movingRight)
             {
-                rigidbody.velocity = new Vector2(0.1f, rigidbody.velocity.y);
-                transform.position = Vector2.MoveTowards(transform.position, character.position, speedAtMoment * Time.deltaTime);
+                //sprite.flipX = true;
+                transform.Translate(speedX, 0, 0);
             }
             else
             {
-                rigidbody.velocity = new Vector2(-0.1f, rigidbody.velocity.y);
-                transform.position = Vector2.MoveTowards(transform.position, character.position, speedAtMoment * Time.deltaTime);
+               //sprite.flipX = false;
+                transform.Translate(-speedX, 0, 0);
             }
 
 
@@ -158,16 +156,17 @@ public class Enemy : MonoBehaviour
     }
 
     void GoBack() {
-        if (point.position.x - transform.position.x > 0) {
+        if (point.position.x - transform.position.x > 0)
+        {
             sprite.flipX = false;
-            rigidbody.velocity = new Vector2(0.1f, rigidbody.velocity.y);
-            transform.position = Vector2.MoveTowards(transform.position, point.position, speedAtMoment * Time.deltaTime);
-        } else {
-            sprite.flipX = true;
-            rigidbody.velocity = new Vector2(-0.1f, rigidbody.velocity.y);
-            transform.position = Vector2.MoveTowards(transform.position, point.position, speedAtMoment * Time.deltaTime);
+            transform.Translate(speedX, 0, 0);
         }
-        animator.SetFloat("Speed", -1);
+        else
+        {
+            sprite.flipX = false;
+            transform.Translate(speedX, 0, 0);
+        }
+        animator.SetBool("isMove", true);
     }
 
     void Attack() {
