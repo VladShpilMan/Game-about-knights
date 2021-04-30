@@ -174,17 +174,24 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("speedAnimCut", speedAnim);
 
         // Detect enemies in range in attack
-        Collider2D[] hitCharacterRight = Physics2D.OverlapCircleAll(attackPointRight.position, attackRange, enemyLayers);
-        Collider2D[] hitCharacterLeft = Physics2D.OverlapCircleAll(attackPointLeft.position, attackRangee, enemyLayers);
+        if (!sprite.flipX)
+        {
+            Collider2D[] hitCharacterRight = Physics2D.OverlapCircleAll(attackPointRight.position, attackRange, enemyLayers);
 
-        foreach (Collider2D character in hitCharacterRight) {
-            if (character.GetComponent<Character>().isProtection == false)    //if the main character does not put up a shield
-                character.GetComponent<Character>().TakeDamage(attackDamage); // damage on the right side
+            foreach (Collider2D character in hitCharacterRight)
+            {
+                if (character.GetComponent<Character>().isProtection == false)    //if the main character does not put up a shield
+                    character.GetComponent<Character>().TakeDamage(attackDamage); // damage on the right side
+            }
         }
-
-        foreach (Collider2D character in hitCharacterLeft) {
-            if(character.GetComponent<Character>().isProtection == false)    //if the main character does not put up a shield
-               character.GetComponent<Character>().TakeDamage(attackDamage);   // damage on the left side
+        else
+        {
+            Collider2D[] hitCharacterLeft = Physics2D.OverlapCircleAll(attackPointLeft.position, attackRangee, enemyLayers);
+            foreach (Collider2D character in hitCharacterLeft)
+            {
+                if (character.GetComponent<Character>().isProtection == false)    //if the main character does not put up a shield
+                    character.GetComponent<Character>().TakeDamage(attackDamage);   // damage on the left side
+            }
         }
     }
    
