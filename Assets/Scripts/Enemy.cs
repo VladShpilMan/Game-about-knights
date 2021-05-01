@@ -124,14 +124,12 @@ public class Enemy : MonoBehaviour
 
 
             if (movingRight)
-            {
-                //sprite.flipX = true;
-                transform.Translate(speedX, 0, 0);
+            {               
+                transform.Translate(-speedX, 0, 0);
             }
             else
             {
-               //sprite.flipX = false;
-                transform.Translate(-speedX, 0, 0);
+                transform.Translate(speedX, 0, 0);
             }
 
 
