@@ -10,6 +10,15 @@ public class CameraController : MonoBehaviour {
     private Transform character;
     private int lastX;
 
+    [SerializeField]
+    float leftLimit;
+    [SerializeField]
+    float rightLimit;
+    [SerializeField]
+    float downLimit;
+    [SerializeField]
+    float topLimit;
+
     void Start() {
         offset = new Vector2(Mathf.Abs(offset.x), offset.y);
         FindCharacter(isLeft);
@@ -40,6 +49,13 @@ public class CameraController : MonoBehaviour {
             Vector3 currentPosition = Vector3.Lerp(transform.position, target, dumping * Time.deltaTime);
             transform.position = currentPosition;
         }
+
+        transform.position = new Vector3
+            (
+            Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
+            Mathf.Clamp(transform.position.y, downLimit, topLimit),
+            transform.position.z
+            );
     }
 
     public void FindCharacter(bool playerIsLeft)
@@ -57,5 +73,12 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(new Vector2(leftLimit, topLimit), new Vector2(rightLimit, topLimit));
+        Gizmos.DrawLine(new Vector2(leftLimit, downLimit), new Vector2(rightLimit, downLimit));
+        Gizmos.DrawLine(new Vector2(leftLimit, topLimit), new Vector2(leftLimit, downLimit));
+        Gizmos.DrawLine(new Vector2(rightLimit, topLimit), new Vector2(rightLimit, downLimit));
+    }
 }
