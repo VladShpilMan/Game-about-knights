@@ -107,7 +107,8 @@ public class Character : MonoBehaviour {
 
         inLive = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; // set the physical parameter to static, so that the gameObject does not fall into the ground
-        GetComponent<Collider2D>().enabled = false; // disable collider to gameObject
+       // GetComponent<Collider2D>().enabled = false; // disable collider to gameObject
+       GetComponent<CapsuleCollider2D>().enabled = false;
         this.enabled = false; // disable script for gameObject
         this.GetComponent<CharacterAttack>().enabled = false;
     }
