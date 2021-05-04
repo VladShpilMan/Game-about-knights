@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour {
 
-    public Animator animator;
-    public Transform attackPointRight;
-    public LayerMask enemyLayers;
-    public Transform attackPointLeft;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform attackPointRight;
+    [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private Transform attackPointLeft;
 
 
-    public float attackRange = 0.5f;
-    public float attackRangee = 0.5f;
-    public float speedAnimCut = 2F;
-    public float attackRate = 2F;
-    float nextAttackTime = 0F;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float attackRangee = 0.5f;
+    [SerializeField] private float speedAnimCut = 2F;
+    [SerializeField] private float attackRate = 2F;
+    private float nextAttackTime = 0F;
 
-    public int attackDamage = 1;
+    [SerializeField] private int attackDamage = 1;
 
     private SpriteRenderer sprite;
 

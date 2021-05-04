@@ -4,16 +4,14 @@ using UnityEngine;
 
 
 public class Character : MonoBehaviour {
-    [SerializeField]
-    private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 3;
     private int currentHealth;
     [SerializeField]
     private float speed = 3.0F;
-    float speedX;
-    [SerializeField]
-    private float jumpForce = 15.0F;
-    public float speedAnimHurt = 2F;
-    public float speedAnimProtection = 2F;
+    private float speedX;
+    [SerializeField] private float jumpForce = 15.0F;
+    [SerializeField] private float speedAnimHurt = 2F;
+    [SerializeField] private float speedAnimProtection = 2F;
 
 
     private bool isGround;

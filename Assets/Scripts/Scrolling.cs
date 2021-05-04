@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Scrolling : MonoBehaviour
 {
-    public bool scrolling, paralax;
+    [SerializeField] private bool scrolling;
+    [SerializeField] private bool paralax;
 
-    public float backgroundSize;
-    public float paralaxSpeed;
+    [SerializeField] private float backgroundSize;
+    [SerializeField] private float paralaxSpeed;
 
     private Transform cameraTransform;
     private Transform[] layers;

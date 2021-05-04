@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHealth = 3;
-    int currentHealth;
-    public int speed = 4;
-    float speedAtMoment;
-    public int positionOfPatrol = 5;
-    public int attackDamage = 1;
+    [SerializeField] private int maxHealth = 3;
+    private int currentHealth;
+    [SerializeField] private int speed = 4;
+    private float speedAtMoment;
+    [SerializeField] private int positionOfPatrol = 5;
+    [SerializeField] private int attackDamage = 1;
 
 
-    public Transform point;
-    Transform character;
+    [SerializeField] private Transform point;
+    private Transform character;
     private SpriteRenderer sprite;
-    public Animator animator;
+    private Animator animator;
     private Rigidbody2D rigidbody;
-    public Transform attackPointRight;
-    public LayerMask enemyLayers;
-    public Transform attackPointLeft;
+    [SerializeField] private Transform attackPointRight;
+    [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private Transform attackPointLeft;
 
-    bool isAttack;
-    bool movingRight;
-    bool chill = false;
-    bool angry = false;
-    bool goBack = false;
+    private bool isAttack;
+    private bool movingRight;
+    private bool chill = false;
+    private bool angry = false;
+    private bool goBack = false;
 
-    public float stoppingDistance;
-    public float speedAnimHurt = 2F;
-    public float speedAnimCut = 2f;
-    public float attackRange = 0.5f;
-    public float attackRangee = 0.5f;
-    public float speedAnim = 2F;
-    public float attackRate = 2F;
-    public float periodAttackRate = 3F;
-    float nextAttackTime = 0F;
-    float periodAttack = 0f;
+    [SerializeField] private float stoppingDistance;
+    [SerializeField] private float speedAnimHurt = 2F;
+    [SerializeField] private float speedAnimCut = 2f;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float attackRangee = 0.5f;
+    [SerializeField] private float speedAnim = 2F;
+    [SerializeField] private float attackRate = 2F;
+    [SerializeField] private float periodAttackRate = 3F;
+    private float nextAttackTime = 0F;
+    private float periodAttack = 0f;
 
     void Start()
     {
