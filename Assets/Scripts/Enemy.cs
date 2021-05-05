@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Unit
 {
-    [SerializeField] private int maxHealth = 3;
+    //[SerializeField] private int maxHealth = 3;
     private int currentHealth;
-    [SerializeField] private int speed = 4;
+   // [SerializeField] private int speed = 4;
     private float speedAtMoment;
     [SerializeField] private int positionOfPatrol = 5;
     [SerializeField] private int attackDamage = 1;
@@ -14,9 +14,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Transform point;
     private Transform character;
-    private SpriteRenderer sprite;
+   // private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
-    private Rigidbody2D rigidbody;
+    //private Rigidbody2D rigidbody;
     [SerializeField] private Transform attackPointRight;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private Transform attackPointLeft;
