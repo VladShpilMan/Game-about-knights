@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,17 +15,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform point;
     private Transform character;
     private SpriteRenderer sprite;
-    private Animator animator;
+    [SerializeField] private Animator animator;
     private Rigidbody2D rigidbody;
     [SerializeField] private Transform attackPointRight;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private Transform attackPointLeft;
 
-    private bool isAttack;
-    private bool movingRight;
-    private bool chill = false;
-    private bool angry = false;
-    private bool goBack = false;
+    bool isAttack;
+    bool movingRight;
+    bool chill = false;
+    bool angry = false;
+    bool goBack = false;
 
     [SerializeField] private float stoppingDistance;
     [SerializeField] private float speedAnimHurt = 2F;

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    [SerializeField] private float dumping = 1.5F;
-    [SerializeField] private Vector2 offset = new Vector2(2f, 1f);
-    [SerializeField] private bool isLeft;
+    public float dumping = 1.5F;
+    public Vector2 offset = new Vector2(2f, 1f);
+    public bool isLeft;
     private Transform character;
     private int lastX;
 
-    [SerializeField] float leftLimit;
-    [SerializeField] float rightLimit;
-    [SerializeField] float downLimit;
-    [SerializeField] float topLimit;
+    [SerializeField]
+    float leftLimit;
+    [SerializeField]
+    float rightLimit;
+    [SerializeField]
+    float downLimit;
+    [SerializeField]
+    float topLimit;
 
     void Start() {
         offset = new Vector2(Mathf.Abs(offset.x), offset.y);

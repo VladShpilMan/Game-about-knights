@@ -6,9 +6,8 @@ using UnityEngine;
 public class Character : MonoBehaviour {
     [SerializeField] private int maxHealth = 3;
     private int currentHealth;
-    [SerializeField]
-    private float speed = 3.0F;
-    private float speedX;
+    [SerializeField] private float speed = 3.0F;
+    float speedX;
     [SerializeField] private float jumpForce = 15.0F;
     [SerializeField] private float speedAnimHurt = 2F;
     [SerializeField] private float speedAnimProtection = 2F;
