@@ -2,41 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Unit
 {
-    [SerializeField] private int maxHealth = 3;
-    private int currentHealth;
-    [SerializeField] private int speed = 4;
     private float speedAtMoment;
     [SerializeField] private int positionOfPatrol = 5;
-    [SerializeField] private int attackDamage = 1;
 
 
     [SerializeField] private Transform point;
-    private Transform character;
-    private SpriteRenderer sprite;
-    [SerializeField] private Animator animator;
-    private Rigidbody2D rigidbody;
-    [SerializeField] private Transform attackPointRight;
-    [SerializeField] private LayerMask enemyLayers;
-    [SerializeField] private Transform attackPointLeft;
+    private Transform character;//
+    [SerializeField] private Animator animator;//
 
-    bool isAttack;
-    bool movingRight;
-    bool chill = false;
-    bool angry = false;
-    bool goBack = false;
+    private bool movingRight;
+    private bool chill = false;
+    private bool angry = false;
+    private bool goBack = false;
 
     [SerializeField] private float stoppingDistance;
     [SerializeField] private float speedAnimHurt = 2F;
     [SerializeField] private float speedAnimCut = 2f;
-    [SerializeField] private float attackRange = 0.5f;
-    [SerializeField] private float attackRangee = 0.5f;
-    [SerializeField] private float speedAnim = 2F;
-    [SerializeField] private float attackRate = 2F;
-    [SerializeField] private float periodAttackRate = 3F;
-    private float nextAttackTime = 0F;
-    private float periodAttack = 0f;
+    [SerializeField] private float speedAnim = 2F;//
+    [SerializeField] private float attackRate = 2F;//
+    private float nextAttackTime = 0F;//
 
     void Start()
     {
@@ -134,33 +120,31 @@ public class Enemy : MonoBehaviour
             speedAtMoment = 2.8f; // the gameObject increases its speed in case of aggression
 
             if (movingRight)
-            {           
+            {
                 transform.position = Vector2.MoveTowards(transform.position, character.position, speedAtMoment * Time.deltaTime);
             }
             else
             {
                 transform.position = Vector2.MoveTowards(transform.position, character.position, speedAtMoment * Time.deltaTime);
             }
-
-
         }
 
-
-        // if the gameObject approached the MainCharacter at the maximum allowed distance, then the game object can make a blow
+        //if the gameObject approached the MainCharacter at the maximum allowed distance, then the game object can make a blow
         if (chek <= 1.2)
         {
             animator.SetBool("isMove", false);
-            isAttack = true;
             if (Time.time >= nextAttackTime)
             {
                 if (Time.time >= nextAttackTime && character.GetComponent<Character>().inLive == true)
                 {
-                    Attack();
+                    animator.SetTrigger("Attack"); // Play an attack animation
+                    animator.SetFloat("speedAnimCut", speedAnim);
                     nextAttackTime = Time.time + 3F / attackRate;
                 }
             }
         }
         if (character.GetComponent<Character>().inLive == false) animator.SetBool("isMove", false);
+        animator.SetBool("isMove", true);
 
     }
 
@@ -177,46 +161,6 @@ public class Enemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, point.position, speedAtMoment * Time.deltaTime);
         }
         animator.SetBool("isMove", true);
-    }
-
-    void Attack()
-    {
-        animator.SetTrigger("Attack"); // Play an attack animation
-        animator.SetFloat("speedAnimCut", speedAnim);
-
-        // Detect enemies in range in attack
-        if (!sprite.flipX)
-        {
-            Collider2D[] hitCharacterRight = Physics2D.OverlapCircleAll(attackPointRight.position, attackRange, enemyLayers);
-
-            foreach (Collider2D character in hitCharacterRight)
-            {
-                if (character.GetComponent<Character>().isProtection == false)    //if the main character does not put up a shield
-                    character.GetComponent<Character>().TakeDamage(attackDamage); // damage on the right side
-            }
-        }
-        else
-        {
-            Collider2D[] hitCharacterLeft = Physics2D.OverlapCircleAll(attackPointLeft.position, attackRangee, enemyLayers);
-            foreach (Collider2D character in hitCharacterLeft)
-            {
-                if (character.GetComponent<Character>().isProtection == false)    //if the main character does not put up a shield
-                    character.GetComponent<Character>().TakeDamage(attackDamage);   // damage on the left side
-            }
-        }
-    }
-
-    void OnDrawGizmosSelected()
-    { // the function draws the radius of the impact
-
-        if (attackPointRight == null)
-            return;
-        if (attackPointLeft == null)
-            return;
-
-        Gizmos.DrawWireSphere(attackPointRight.position, attackRange);
-
-        Gizmos.DrawWireSphere(attackPointLeft.position, attackRangee);
     }
 
 
@@ -241,5 +185,6 @@ public class Enemy : MonoBehaviour
         GetComponent<CapsuleCollider2D>().enabled = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; // set the physical parameter to static, so that the gameObject does not fall into the ground
         this.enabled = false; // disable script for gameObject
+        this.GetComponent<EnemyAttack>().enabled = false;
     }
 }

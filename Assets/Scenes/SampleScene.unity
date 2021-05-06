@@ -2303,6 +2303,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &88062327 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7607596788348329279, guid: e1999c61eabbabb4c94c7679f0de64d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7607596787231021682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &90249145
 GameObject:
   m_ObjectHideFlags: 0
@@ -5034,15 +5040,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 238237474}
   attackPointRight: {fileID: 931114040}
+  attackPointLeft: {fileID: 1787541651}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  attackPointLeft: {fileID: 1787541651}
-  attackRange: 0.63
-  attackRangee: 0.63
+  attackDamage: 1
+  attackRangeRight: 0
+  attackRangeLeft: 0
   speedAnimCut: 2
   attackRate: 2
-  attackDamage: 1
 --- !u!95 &238237474 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2468469628366900779, guid: ac1acb816ca495a4087caac44567f855,
@@ -15302,6 +15308,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7607596787231021682}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &706022398 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7607596788412589406, guid: e1999c61eabbabb4c94c7679f0de64d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7607596787231021682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!70 &706022403
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -15318,6 +15330,29 @@ CapsuleCollider2D:
   m_Offset: {x: 0.04, y: -0.03}
   m_Size: {x: 0.41, y: 1.08}
   m_Direction: 0
+--- !u!114 &706022404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706022397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672f3746cbff0304e89e06ca1367345c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 706022398}
+  attackPointRight: {fileID: 88062327}
+  attackPointLeft: {fileID: 1358755089}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  attackDamage: 0
+  attackRangeRight: 0.5
+  attackRangeLeft: 0.5
+  speedAnimCut: 0
+  attackRate: 2
 --- !u!1 &707688872
 GameObject:
   m_ObjectHideFlags: 0
@@ -25707,6 +25742,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1358755089 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7607596787802209111, guid: e1999c61eabbabb4c94c7679f0de64d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7607596787231021682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1359825741
 GameObject:
   m_ObjectHideFlags: 0
@@ -28182,7 +28223,7 @@ PrefabInstance:
     - target: {fileID: 2468469628366900780, guid: ac1acb816ca495a4087caac44567f855,
         type: 3}
       propertyPath: maxHealth
-      value: 50
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2468469628366900781, guid: ac1acb816ca495a4087caac44567f855,
         type: 3}
@@ -42904,7 +42945,7 @@ PrefabInstance:
     - target: {fileID: 7607596788412589400, guid: e1999c61eabbabb4c94c7679f0de64d0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.69
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 7607596788412589400, guid: e1999c61eabbabb4c94c7679f0de64d0,
         type: 3}
