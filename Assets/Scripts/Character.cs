@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+<<<<<<< HEAD
 public class Character : Unit
 {
     //private int currentHealth;
     private float speedX;
     // [SerializeField] private float speedAnimHurt = 2F;
+=======
+public class Character : Unit {
+   // [SerializeField] private int maxHealth = 3;
+    private int currentHealth;
+    //[SerializeField] private float speed = 3.0F;
+    float speedX;
+    [SerializeField] private float jumpForce = 15.0F;
+    [SerializeField] private float speedAnimHurt = 2F;
+>>>>>>> aa35c874db5769176954c7a93c7e5cf87eb21124
     [SerializeField] private float speedAnimProtection = 2F;
 
 
@@ -15,11 +25,20 @@ public class Character : Unit
     public bool inLive;
     public bool isProtection = false;
 
+<<<<<<< HEAD
     //private Animator animator;
     private Collider2D collider;
 
     private void Awake()
     {
+=======
+    //private Rigidbody2D rigidbody;
+   // private SpriteRenderer sprite;
+    private Animator animator;
+    private Collider2D collider;
+
+    private void Awake() {
+>>>>>>> aa35c874db5769176954c7a93c7e5cf87eb21124
         inLive = true;
         currentHealth = maxHealth;
         rigidbody = GetComponent<Rigidbody2D>();
@@ -28,6 +47,10 @@ public class Character : Unit
         collider = GetComponentInChildren<Collider2D>();
 
     }
+
+    //private void Start () {
+
+    //}
 
 
     private void FixedUpdate()
@@ -98,9 +121,13 @@ public class Character : Unit
     }
 
     // the function deals damage to the object, if the object has no lives left, then it dies
+<<<<<<< HEAD
     public override void TakeDamage(int damage)
     {
 
+=======
+    public override void TakeDamage(int damage) {
+>>>>>>> aa35c874db5769176954c7a93c7e5cf87eb21124
         currentHealth -= damage;
         animator.SetTrigger("Hurt");  // play animation of taking damage
         animator.SetFloat("speedAnimHurt", speedAnimHurt);

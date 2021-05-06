@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
+<<<<<<< HEAD
+=======
+    //[SerializeField] private int maxHealth = 3;
+    private int currentHealth;
+   // [SerializeField] private int speed = 4;
+>>>>>>> aa35c874db5769176954c7a93c7e5cf87eb21124
     private float speedAtMoment;
     [SerializeField] private int positionOfPatrol = 5;
 
 
     [SerializeField] private Transform point;
+<<<<<<< HEAD
     private Transform character;//
     [SerializeField] private Animator animator;//
 
@@ -16,6 +23,21 @@ public class Enemy : Unit
     private bool chill = false;
     private bool angry = false;
     private bool goBack = false;
+=======
+    private Transform character;
+   // private SpriteRenderer sprite;
+    [SerializeField] private Animator animator;
+    //private Rigidbody2D rigidbody;
+    [SerializeField] private Transform attackPointRight;
+    [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private Transform attackPointLeft;
+
+    bool isAttack;
+    bool movingRight;
+    bool chill = false;
+    bool angry = false;
+    bool goBack = false;
+>>>>>>> aa35c874db5769176954c7a93c7e5cf87eb21124
 
     [SerializeField] private float stoppingDistance;
     [SerializeField] private float speedAnimHurt = 2F;
